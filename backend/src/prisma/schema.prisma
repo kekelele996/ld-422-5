@@ -61,6 +61,10 @@ model ReagentUsage {
   experimentId String
   purpose String
   approverId String?
+  approvalStatus String
+  approvalComment String?
+  approvedAt DateTime?
+  submittedAt DateTime
 }
 
 model ProjectMember {

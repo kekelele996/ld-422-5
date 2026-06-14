@@ -1,4 +1,4 @@
-import { HazardLevel, ProjectStatus, ReviewStatus, StorageCondition } from "../../types/enums.ts";
+import { ApprovalStatus, HazardLevel, ProjectStatus, ReviewStatus, StorageCondition } from "../../types/enums.ts";
 import type { AuditLog, ExperimentRecord, ProjectMember, Reagent, ReagentUsage, ResearchProject, User } from "../../types/interfaces.ts";
 
 export const users: User[] = [
@@ -26,8 +26,9 @@ export const reagents: Reagent[] = [
 ];
 
 export const reagentUsages: ReagentUsage[] = [
-  { id: "use-001", reagentId: "rg-ethanol", userId: "u-researcher", quantity: 0.5, usedAt: "2026-06-09", experimentId: "ex-001", purpose: "样本固定", approverId: "u-pi" },
-  { id: "use-002", reagentId: "rg-pbs", userId: "u-student", quantity: 2, usedAt: "2026-06-10", experimentId: "ex-002", purpose: "样本清洗", approverId: "u-researcher" }
+  { id: "use-001", reagentId: "rg-ethanol", userId: "u-researcher", quantity: 0.5, usedAt: "2026-06-09", experimentId: "ex-001", purpose: "样本固定", approverId: "u-pi", approvalStatus: ApprovalStatus.Approved, approvedAt: "2026-06-09T10:00:00+08:00", submittedAt: "2026-06-09T09:00:00+08:00" },
+  { id: "use-002", reagentId: "rg-pbs", userId: "u-student", quantity: 2, usedAt: "2026-06-10", experimentId: "ex-002", purpose: "样本清洗", approverId: "u-researcher", approvalStatus: ApprovalStatus.Approved, approvedAt: "2026-06-10T14:00:00+08:00", submittedAt: "2026-06-10T13:00:00+08:00" },
+  { id: "use-003", reagentId: "rg-acid", userId: "u-student", quantity: 100, usedAt: "2026-06-12", experimentId: "ex-002", purpose: "酸洗处理", approvalStatus: ApprovalStatus.Pending, submittedAt: "2026-06-12T15:30:00+08:00" }
 ];
 
 export const members: ProjectMember[] = [

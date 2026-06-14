@@ -1,4 +1,4 @@
-import type { HazardLevelValue, ProjectStatusValue, ReviewStatusValue, StorageConditionValue, UserRole } from "./enums.ts";
+import type { ApprovalStatusValue, HazardLevelValue, ProjectStatusValue, ReviewStatusValue, StorageConditionValue, UserRole } from "./enums.ts";
 
 export type User = { id: string; name: string; role: UserRole };
 export type ResearchProject = {
@@ -52,6 +52,10 @@ export type ReagentUsage = {
   experimentId: string;
   purpose: string;
   approverId?: string;
+  approvalStatus: ApprovalStatusValue;
+  approvalComment?: string;
+  approvedAt?: string;
+  submittedAt: string;
 };
 export type ProjectMember = {
   id: string;

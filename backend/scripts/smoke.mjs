@@ -44,6 +44,7 @@ const reagent = reagentRoutes("POST", "/api/reagents", query, pi, {
   minStock: 1
 });
 assert.equal(reagent.name, "烟雾测试试剂");
+assert.equal(reagent.stock, 6);
 
 const usage = reagentUsageRoutes("POST", "/api/reagent-usages", query, pi, {
   reagentId: reagent.id,
@@ -52,6 +53,14 @@ const usage = reagentUsageRoutes("POST", "/api/reagent-usages", query, pi, {
   purpose: "smoke usage"
 });
 assert.equal(usage.quantity, 1);
+assert.equal(usage.approvalStatus, "Pending");
+const reagentAfterSubmit = reagentRoutes("GET", `/api/reagents/${reagent.id}`, query, pi, {});
+assert.equal(reagentAfterSubmit.stock, 6);
+
+const approvedUsage = reagentUsageRoutes("POST", `/api/reagent-usages/${usage.id}/approve`, query, pi, { comment: "ok" });
+assert.equal(approvedUsage.approvalStatus, "Approved");
+const reagentAfterApprove = reagentRoutes("GET", `/api/reagents/${reagent.id}`, query, pi, {});
+assert.equal(reagentAfterApprove.stock, 5);
 
 const stocked = reagentRoutes("PATCH", `/api/reagents/${reagent.id}/stock-in`, query, pi, { quantity: 2 });
 assert.equal(stocked.stock, 7);
